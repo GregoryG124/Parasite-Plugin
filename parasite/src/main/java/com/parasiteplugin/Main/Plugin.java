@@ -1,4 +1,4 @@
-package com.parasiteplugin.plugin;
+package com.parasiteplugin.Main;
 
 import java.util.logging.Logger;
 

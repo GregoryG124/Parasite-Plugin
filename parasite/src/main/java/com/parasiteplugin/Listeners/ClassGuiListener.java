@@ -12,6 +12,8 @@ public class ClassGuiListener implements Listener {
 
     @EventHandler
     public void openInventoryClick(final InventoryClickEvent event){
+
+        // cases for when in main class inventory
         if (event.getView().getTitle().equalsIgnoreCase("Classes")){
             
             // cancels the click event when in Classes inventory
@@ -41,10 +43,11 @@ public class ClassGuiListener implements Listener {
             else {
                 return;
             }
-            
+        }
 
-
-
+        // cases for when in add class inventory
+        else if (event.getView().getTitle().equalsIgnoreCase("Add Class")){
+            System.out.println("FIXME: implement the functionality for add class event handler");
         }
     }
     

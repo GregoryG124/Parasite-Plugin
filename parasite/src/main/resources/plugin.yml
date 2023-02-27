@@ -1,5 +1,5 @@
 name: parasite
-main: com.parasiteplugin.plugin.Plugin
+main: com.parasiteplugin.Main.Plugin
 version: 1.0-SNAPSHOT
 api-version: 1.15
 
