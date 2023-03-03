@@ -75,7 +75,7 @@ public class ClassGuiInventories{
 
     // method for quickly creating items to add to inventories
     // NOTE_1: not sure it's needed yet, but could also pass an int to method allowing for material stack size to be changed
-    protected ItemStack createItems(final Material material, final String name, final String lore){
+    public static ItemStack createItems(final Material material, final String name, final String lore){
         
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();

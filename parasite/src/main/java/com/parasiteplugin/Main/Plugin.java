@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.parasiteplugin.Commands.ClassGuiCommands;
-import com.parasiteplugin.Listeners.ClassGuiListener;
+import com.parasiteplugin.Listeners.InventoryClickListener;
 
 /*
  * parasite java plugin
@@ -13,6 +13,8 @@ import com.parasiteplugin.Listeners.ClassGuiListener;
 public class Plugin extends JavaPlugin
 {
   private static final Logger LOGGER=Logger.getLogger("parasite");
+
+
 
   public void onEnable()
   {
@@ -23,7 +25,7 @@ public class Plugin extends JavaPlugin
 
 
     // register listeners
-    getServer().getPluginManager().registerEvents(new ClassGuiListener(), this);
+    getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
 
 
   }
