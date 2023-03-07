@@ -9,7 +9,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.parasiteplugin.ClassObjects.PlayerClass;
 import com.parasiteplugin.Functions.ClassGuiFunctions;
-import com.parasiteplugin.Inventories.ClassGuiInventories;
 
 public class InventoryClickListener implements Listener {
 
@@ -31,7 +30,7 @@ public class InventoryClickListener implements Listener {
             }
             // click "add class" event
             else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("add class")){
-                ClassGuiFunctions.openAddClassMenu(player);
+                ClassGuiFunctions.openSetClassIconMenu(player);
             }
             // click "remove class" event
             else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("remove class")){
@@ -82,7 +81,7 @@ public class InventoryClickListener implements Listener {
                     PlayerClass playerClass = new PlayerClass();
                     
                     // open anvil gui to name class
-                    ClassGuiFunctions.openNameClassMenu(player);;
+                    ClassGuiFunctions.openNameClassMenu(player);
 
 
 

@@ -4,15 +4,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.parasiteplugin.Inventories.ClassGuiInventories;
+import com.parasiteplugin.Inventories.GameclassMenu;
+import com.parasiteplugin.Inventories.GameclassSetIcon;
+import com.parasiteplugin.Inventories.GameclassSetName;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 
 
 
@@ -21,7 +25,7 @@ public class ClassGuiFunctions {
     // Class menu methods
     public static void openClassMenu(Player player){
         // create new instance of ClassGuiInventories for use in this method
-        ClassGuiInventories classGui = new ClassGuiInventories();
+        GameclassMenu classGui = new GameclassMenu();
         // initialize the inventory
         classGui.ClassOptionsGui();
         // open the class inventory for player who called this command
@@ -29,9 +33,9 @@ public class ClassGuiFunctions {
     }
 
     // Add class menu methods
-    public static void openAddClassMenu(Player player){
+    public static void openSetClassIconMenu(Player player){
         // create new instance of ClassGuiInventories for use in this method
-        ClassGuiInventories classAddGui = new ClassGuiInventories();
+        GameclassSetIcon classAddGui = new GameclassSetIcon();
         // initialize the inventory
         classAddGui.ClassAddGui();
         // open the class add inventory for the player who called this command
@@ -42,7 +46,7 @@ public class ClassGuiFunctions {
     public final static class ToggleBlocked{
         // class variables
         private final static int slot = 8;
-        private final static ItemStack item = ClassGuiInventories.createItems(Material.RED_STAINED_GLASS_PANE, ChatColor.DARK_RED + "Accept (BLOCKED)", "You must insert an item into slot 1");
+        private final static ItemStack item = createItems(Material.RED_STAINED_GLASS_PANE, ChatColor.DARK_RED + "Accept (BLOCKED)", "You must insert an item into slot 1");
         
         // getter methods
         public static int getSlot(){
@@ -59,7 +63,7 @@ public class ClassGuiFunctions {
     public final static class ToggleUnblocked{
         //class variables
         private final static int slot = 8;
-        private final static ItemStack item = ClassGuiInventories.createItems(Material.GREEN_STAINED_GLASS_PANE, ChatColor.GREEN + "Accept", "Click to confirm item for class icon");
+        private final static ItemStack item = createItems(Material.GREEN_STAINED_GLASS_PANE, ChatColor.GREEN + "Accept", "Click to confirm item for class icon");
         
         // getter methods
         public static int getSlot(){
@@ -73,7 +77,7 @@ public class ClassGuiFunctions {
 
     // set name menu methods
     public static void openNameClassMenu(Player player){
-        ClassGuiInventories classNameGui = new ClassGuiInventories();
+        GameclassSetName classNameGui = new GameclassSetName();
         classNameGui.ClassNameGui();
         classNameGui.ClassNameOpenInventory(player);
     }
@@ -122,6 +126,25 @@ public class ClassGuiFunctions {
         System.out.println("FIXME: implement modifyJson method");
     }
 
+
+
+
+
+    // method for quickly creating items to add to inventories
+    // NOTE_1: not sure it's needed yet, but could also pass an int to method allowing for material stack size to be changed
+    public static ItemStack createItems(final Material material, final String name, final String lore){
+        
+        final ItemStack item = new ItemStack(material, 1);
+        final ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(name);
+
+        meta.setLore(Arrays.asList(lore));
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
 
     
 }
