@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -14,6 +15,7 @@ public class ClassGuiInventories{
 
     public Inventory classOptionsInv;
     public Inventory classAddInv;
+    public Inventory classNameInv;
 
 
     // Code relating to the ClassOptions gui
@@ -65,6 +67,25 @@ public class ClassGuiInventories{
 
     public void ClassAddOpenInventory(final Player caller){
         caller.openInventory(classAddInv);       
+    }
+
+
+    // code related to name class gui
+    public void ClassNameGui(){
+
+        // creates new classnamegui inventory
+        classNameInv = Bukkit.createInventory(null, InventoryType.ANVIL, "Set Class Name");
+
+        // puts items in to inventory
+        ClassNameInitializeInventory();
+    }
+
+    public void ClassNameInitializeInventory(){
+        classNameInv.setItem(0, createItems(Material.GREEN_STAINED_GLASS_PANE, "Type Name Here", "Click to confirm class name"));
+    }
+
+    public void ClassNameOpenInventory(final Player caller){
+        caller.openInventory(classNameInv);
     }
 
 

@@ -1,16 +1,23 @@
 package com.parasiteplugin.Listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+
+import com.parasiteplugin.ClassObjects.PlayerClass;
 import com.parasiteplugin.Functions.ClassGuiFunctions;
+import com.parasiteplugin.Inventories.ClassGuiInventories;
 
 public class InventoryClickListener implements Listener {
 
     @EventHandler
     public void openInventoryClick(final InventoryClickEvent event){
+
+        // define player who trigered the event
+        Player player = (Player) event.getWhoClicked();
 
         // cases for when in main class inventory
         if (event.getView().getTitle().equalsIgnoreCase("Classes")){
@@ -24,7 +31,6 @@ public class InventoryClickListener implements Listener {
             }
             // click "add class" event
             else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("add class")){
-                Player player = (Player) event.getWhoClicked();
                 ClassGuiFunctions.openAddClassMenu(player);
             }
             // click "remove class" event
@@ -43,6 +49,8 @@ public class InventoryClickListener implements Listener {
                 return;
             }
         }
+
+
         // cases for when in add class inventory
         else if (event.getView().getTitle().equalsIgnoreCase("Add Class")){
             System.out.println("Add Class Click");
@@ -54,13 +62,43 @@ public class InventoryClickListener implements Listener {
                 event.getView().setItem(ClassGuiFunctions.ToggleUnblocked.getSlot(), ClassGuiFunctions.ToggleUnblocked.getItemStack());
             }            
             
-            if (event.getSlot() == 0 && event.getCursor().getType() == Material.AIR){
+            // set blocked conditions
+            else if (event.getSlot() == 0 && event.getCursor().getType() == Material.AIR){
                 event.getView().setItem(8, null);
                 event.getView().setItem(ClassGuiFunctions.ToggleBlocked.getSlot(), ClassGuiFunctions.ToggleBlocked.getItemStack());
             }
+            
+            // player clicks placeholder items in the add class inventory
+            else if (event.getSlot() > 0 && event.getSlot() < 8){
+                event.setCancelled(true);
+            }
+
+            // checks if player clicked "accept" button
+            else if (event.getSlot() == 8) {
+                if (event.getView().getItem(8).getType() == Material.GREEN_STAINED_GLASS_PANE){
+                    event.setCancelled(true);
+
+                    // create new instance of the PlayerClass class
+                    PlayerClass playerClass = new PlayerClass();
+                    
+                    // open anvil gui to name class
+                    ClassGuiFunctions.openNameClassMenu(player);;
 
 
 
-        }  
+                }
+
+                else {
+                    event.setCancelled(true);
+                }
+
+            }
+
+        }
+
+        // cases a for when in Set Name Inventory
+        else if (event.getView().getTitle().equalsIgnoreCase("Set Class Name")){
+            System.out.println("Anvil " + event.getSlot());
+        }
     }
 }

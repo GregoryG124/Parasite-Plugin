@@ -5,7 +5,15 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.parasiteplugin.Inventories.ClassGuiInventories;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 
 
 public class ClassGuiFunctions {
@@ -62,5 +70,58 @@ public class ClassGuiFunctions {
             return item;
         }
     }
+
+    // set name menu methods
+    public static void openNameClassMenu(Player player){
+        ClassGuiInventories classNameGui = new ClassGuiInventories();
+        classNameGui.ClassNameGui();
+        classNameGui.ClassNameOpenInventory(player);
+    }
+
+    /* 
+     * Brainstorming
+     * DONT USE LIST OF ARGS WHEN READING AND WRITING TO JSON!
+     * take individual values for each gameclass attribute
+     * arg[0] = class name
+     * arg[1] = attribute 1
+     * arg[2] = attribute 2
+     * ...
+     * arg[n] = attribute n
+     * 
+     * pass string "not-set" to all string attributes on class creation
+     * pass double -1 to all double attributes on class creation
+     * 
+     * when on attribute must be updated but others left untouched pass string "no-edit" to class attribute 
+     */
+
+
+    // write to class JSON
+    public static void writeJson(String className, double speed, double health, double energy, 
+                                double sanity ,double armor, double damage, double attackSpeed, 
+                                double attackRange, double visionRange, double energyRegen, 
+                                double healthRegen, double hungerDecay){
+        try (Writer writer = new FileWriter("parasite\\src\\main\\java\\com\\parasiteplugin\\Data\\GameClasses.json")){
+            Gson gson = new GsonBuilder().create();
+
+            
+        }
+         catch (IOException e){
+            e.printStackTrace();
+         }
+
+    }
+
+    
+    // read from class JSON
+    public static void readJson(String[] args){
+        System.out.println("FIXME: implement readJson method");
+    }
+
+    // modify from class JSON ??? not sure if needed at the moment
+    public static void modifyJson(){
+        System.out.println("FIXME: implement modifyJson method");
+    }
+
+
     
 }
